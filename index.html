@@ -13,16 +13,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
 </head>
 
-<body style="margin: 0; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+<body style="margin: 0;">
   <div 
     style=" background-image: url(./img/movie2.jpg);;background-repeat: no-repeat;background-size: cover;margin: 0;background-attachment: fixed; width: 100%;"
     class="">
-    <div style="background: linear-gradient(to bottom, #cf083d, #df7a07, #0da6a3);" class="w-100 sticky-top ">
-     
+    <div style="background: linear-gradient(to bottom, #cf083d, #df7a07, #0da6a3);" class="w-100 sticky-top">
+      
       <div>
-        <h1 style="font-size: xx-large;"><i class="fa-solid fa-2x fa-clapperboard" style="margin-left: 20px;"></i> Movie Zone</h1>
+        <h1 style="font-size: xx-large;"><i class="fa-solid fa-2x fa-clapperboard " style="margin-left: 20px;color:white;"></i> Movie Zone</h1>
       </div>
     </div>
 
@@ -36,25 +37,28 @@
       </form>
     </div>
     <br>
-    <div class="w-75 container-fluid  col-lg-4" style=" align-items: center;color: rgb(243, 17, 213);"> 
+    <div class="w-75 container-fluid  col-lg-4" style=" align-items: center;color:white;"> 
     <div id="result" class=" ">
 
     </div>
     </div>
-
+   
     </div>
 </body>
 <script>
   function movieData() {
     movieName = example.value
-    fetch(`http://www.omdbapi.com/?s=${movieName}&apikey=5c471eeb`).then(data => data.json()).then(cData => displayData(cData))
-
+    fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=a8ab1a86&t=${movieName}`).then(data => data.json()).then(cData => displayData(cData))
+    // (`http://www.omdbapi.com/?s=${movieName}&apikey=5c471eeb`)
     function displayData(movieArray) {
 
-      name = movieArray.Search[0].Title
-      year = movieArray.Search[0].Year
-      post = movieArray.Search[0].Poster
-      type = movieArray.Search[0].Type
+      name = movieArray.Title
+      dire = movieArray.Director
+      act = movieArray.Actors
+      year = movieArray.Released
+      post = movieArray.Poster
+      type = movieArray.Genre
+      rate = movieArray.Ratings[0].Value
 
       result.innerHTML = `
      <div  class="container">
@@ -67,13 +71,19 @@
               </div>
         </div>
         <br>
-          <div class="col-lg-4 col-md-6 col-sm-12  " style="width:600px;  background-image: url(./img/cinema-background-z508rtzpntu5r9v0.jpg);background-size: cover;background-repeat: no-repeat; margin-left:5px;"> 
-            <div class="col-lg-4 col-md-6 col-sm-12 w-100  "style="margin-top:30px; ">
-              <h1 class="" style="">Movie Name: ${name}</h1>
+          <div class="col-lg-4 col-md-6 col-sm-12 bg-black" style="width:600px;background-image: url(./img/cinema-background-z508rtzpntu5r9v0.jpg); background-size: cover;background-repeat: no-repeat; margin-left:5px;"> 
+            <div class="col-lg-4 col-md-6 col-sm-12 w-100" style="margin-top:30px; ">
+              <h2 class="" style="">Movie Name: ${name}</h2>
+              <br>
+             <h2 class="" style="">Director: ${dire}</h2>
              <br>
-             <h1 class="" style="">Releasing Year: ${year}</h1>
+             <h2 class="" style="">Actors: ${act}</h2>
+             <br>
+             <h2 class="" style="">Released: ${year}</h2>
             <br>
-            <h1 class="" style="">Type: ${type}</h1>
+            <h2 class="" style="">Rate: ${rate}</h2>
+            <br>
+            <h2 class="" style="">Type: ${type}</h2>
                   </div>
             </div>
           </div>
